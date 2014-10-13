@@ -1,0 +1,13 @@
+==  COPYRIGHT ==
+  
+    Copyright(C)2014 Modus Datisi
+
+== INSTALL == 
+    
+    1.) on Linux & Cygwin
+ 
+    === Linux & Cygwin ===
+
+        ./configure
+        make
+        make install
