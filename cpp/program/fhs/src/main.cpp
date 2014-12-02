@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------
+#include "../include/class.hpp"
 
-auto main(int argc, const char* argv[]) -> int
+int main()
 {
+    MyClass::hello();
 }
-
