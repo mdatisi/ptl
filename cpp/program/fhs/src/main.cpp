@@ -2,5 +2,5 @@
 
 int main()
 {
-    MyClass::hello();
+    MyClass::my_function();
 }
