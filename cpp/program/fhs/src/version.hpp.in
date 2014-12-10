@@ -5,6 +5,7 @@
 
 namespace magic
 {
+
 static const std::map<const char*, const char*> 
 cmake_variables {
 
@@ -348,6 +349,14 @@ cmake_properties {
 
 const char* 
 project_name_version {"@CMAKE_PROJECT_NAME@ @PROJECT_VERSION@"};
+
+
+//TODO : Implement a better wrapper for 'Raw' strings
+const char*
+authors {R"1234MAGIC(@MD_AUTHORS@)1234MAGIC"};
+
+const char*
+copying {R"1234MAGIC(@MD_COPYING@)1234MAGIC"};
 
 }//namespace magic
 

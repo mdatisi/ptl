@@ -45,6 +45,12 @@ if (MD_VERBOSE)
     message(STATUS "-> CMAKE_BINARY_DIR               : ${CMAKE_BINARY_DIR}")
 endif()
 
+#AUTHORS
+file(READ "AUTHORS" MD_AUTHORS)
+
+#COPYING
+file(READ "COPYING" MD_COPYING)
+
 #Colored Makefile
 set(CMAKE_COLOR_MAKEFILE TRUE)
 

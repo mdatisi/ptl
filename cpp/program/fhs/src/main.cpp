@@ -11,6 +11,8 @@ try
 {
     using namespace std;
     cout << "Welcome to " << magic::project_name_version << endl;
+    cout <<  magic::authors << endl;
+    cout <<  magic::copying << endl;
 
     MyClass::my_function();
     return 0;
