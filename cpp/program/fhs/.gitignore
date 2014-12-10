@@ -1,4 +1,7 @@
 
+# The files below are automatically generated
+src/version.hpp
+
 #----- Object files resulting from compilation
 *.o
 **/*.o

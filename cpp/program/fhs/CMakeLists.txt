@@ -210,7 +210,7 @@ endif()
 
 add_executable(ptl ${SRCFILES})
 
-#configure_file( version.hpp.in version.hpp)
+configure_file( ${MD_PROJECT_SRC_ABSDIR}/version.hpp.in ${MD_PROJECT_SRC_ABSDIR}/version.hpp)
 
 #target_link_libraries(hellocmake ${Boost_LIBRARIES} armadillo pthread)
 

@@ -1,17 +1,22 @@
 //Module
 #include "../include/class.hpp"
+#include "version.hpp"
 
 //C++ Standard Library
 #include <iostream>
 
-int main()
+auto main(int argc, char* argv[]) -> int
 {
-try{
+try
+{
+    using namespace std;
+    cout << "Welcome to " << magic::project_name_version << endl;
+
     MyClass::my_function();
-    throw 0;
     return 0;
 }
-catch(...) {
+catch(...)
+{
     std::cerr << "Unspecified exception caught at main level" << std::endl;
 }
 }
