@@ -1,22 +1,116 @@
-#-------------------------------------------------------------------------------
-# Copyright(C)2014 Modus Datisi
-#-------------------------------------------------------------------------------
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#-------------------------------------------------------------------------------
-cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
+set(MD_CMAKE_MINIMUM_VERSION_REQUIRED 3.0.0)
+cmake_minimum_required(VERSION ${MD_CMAKE_MINIMUM_VERSION_REQUIRED} FATAL_ERROR)
+set(MD_GNU_ALL_PERMISSIVE_LICENSE [=[
+--------------------------------------------------------------------------------
+Copyright(C)2014 Modus Datisi
+This CMake script file is licensed under the GNU All-Permissive license.
 
+--------------------------------------------------------------------------------
+CMake is a cross-platform, open-source make system.
+
+CMake is used to control the software compilation process using simple platform-
+independent and compiler-independent configuration files. CMake generates native
+makefiles and workspaces that can be used in the compiler environment of your
+choice. CMake is quite sophisticated: it is possible to support complex
+environments requiring system configuration, preprocessor generation,
+code generation, and template instantiation.
+
+Please go to http://www.cmake.org/HTML/About.html to learn more about CMake.
+--------------------------------------------------------------------------------
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+--------------------------------------------------------------------------------
+]=])
+#-------------------------------------------------------------------------------
+#This script Layout :
+#
+#    1)
+#    2)
+#    3) 
+#    4) 
+#-------------------------------------------------------------------------------
+
+#TODO : Delete the line below
+set(MD_VERBOSE ON)
+
+#-------------------------------------------------------------------------------
+# 1) CMake configuration
+#-------------------------------------------------------------------------------
+#CMAKE configuration
+if (MD_VERBOSE)
+    message(STATUS "-> Minimum CMake version required : ${MD_CMAKE_MINIMUM_VERSION_REQUIRED}")
+    message(STATUS "-> Actual  CMake version          : ${CMAKE_VERSION}")
+    message(STATUS "-> CMAKE_BINARY_DIR               : ${CMAKE_BINARY_DIR}")
+endif()
+
+#Colored Makefile
+set(CMAKE_COLOR_MAKEFILE TRUE)
+
+
+#-------------------------------------------------------------------------------
+# 2) Environment configuration
+#-------------------------------------------------------------------------------
+#
+#Linux Kernel
+#TODO : Portability Issue here
+EXECUTE_PROCESS(COMMAND uname -r OUTPUT_VARIABLE os_release OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+if (MD_VERBOSE)
+    message(STATUS "-> CMAKE_SYSTEM                   : ${CMAKE_SYSTEM}")
+    message(STATUS "-> CMAKE_SYSTEM_NAME              : ${CMAKE_SYSTEM_NAME}")
+    message(STATUS "-> CMAKE_SYSTEM_VERSION           : ${CMAKE_SYSTEM_VERSION}")
+    message(STATUS "-> CMAKE_SYSTEM_PROCESSOR         : ${CMAKE_SYSTEM_PROCESSOR}")
+    message(STATUS "-> Linux Kernel                   : ${os_release}")
+endif()
+
+
+#-------------------------------------------------------------------------------
+# 2) Project structure
+#-------------------------------------------------------------------------------
 project(ptl VERSION 1.0 LANGUAGES CXX)
+
+#"root" absolute dir
+get_filename_component(MD_PROJECT_ROOT_ABSDIR 
+                       "${CMAKE_SOURCE_DIR}" ABSOLUTE)
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_ROOT_ABSDIR})
+
+#"root"/3rdparty absolute subdir
+set(MD_PROJECT_3RDPARTY_ABSDIR "${MD_PROJECT_ROOT_ABSDIR}/3rdparty")
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_3RDPARTY_ABSDIR})
+
+#"root"/doc absolute subdir
+set(MD_PROJECT_DOC_ABSDIR "${MD_PROJECT_ROOT_ABSDIR}/doc")
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_DOC_ABSDIR})
+
+#"root"/include absolute subdir
+set(MD_PROJECT_INCLUDE_ABSDIR "${MD_PROJECT_ROOT_ABSDIR}/include")
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_INCLUDE_ABSDIR})
+
+#"root"/src absolute subdir
+set(MD_PROJECT_SRC_ABSDIR "${MD_PROJECT_ROOT_ABSDIR}/src")
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_SRC_ABSDIR})
+
+#"root"/tools absolute subdir
+set(MD_PROJECT_TOOLS_ABSDIR "${MD_PROJECT_ROOT_ABSDIR}/tools")
+set(MD_ABSDIRS ${MD_ABSDIRS} ${MD_PROJECT_TOOLS_ABSDIR})
+
+if (MD_VERBOSE)
+    message(STATUS "-> MD_PROJECT_ROOT_ABSDIR     : ${MD_PROJECT_ROOT_ABSDIR}")
+    message(STATUS "-> MD_PROJECT_3RDPARTY_ABSDIR : ${MD_PROJECT_3RDPARTY_ABSDIR}")
+    message(STATUS "-> MD_PROJECT_DOC_ABSDIR      : ${MD_PROJECT_DOC_ABSDIR}")
+    message(STATUS "-> MD_PROJECT_INCLUDE_ABSDIR  : ${MD_PROJECT_INCLUDE_ABSDIR}")
+    message(STATUS "-> MD_PROJECT_SRC_ABSDIR      : ${MD_PROJECT_SRC_ABSDIR}")
+    message(STATUS "-> MD_PROJECT_TOOLS_ABSDIR    : ${MD_PROJECT_TOOLS_ABSDIR}")
+endif()
+
+#Checking existence of the directories
+foreach(d ${MD_ABSDIRS})
+    if (NOT IS_DIRECTORY ${d})
+        message(FATAL_ERROR "${d} check failed")
+    endif()
+endforeach()
 
 #This files contains the MDATISI options for the project
 include(options.cmake OPTIONAL RESULT_VARIABLE MD_OPTIONS_FILE)
@@ -26,26 +120,6 @@ if (MD_OPTIONS_FILE)
     endif()    
 endif()
 
-#Source files    
-#Default policy is to build all source files
-set(DO_GLOBAL_RECURSE ON)
-
-if (DO_GLOBAL_RECURSE)
-    file(GLOB SRCFILES . *.cpp)
-
-    #Declare excluded files below
-    #set(EXCLUDED_FROM_BUILD )
-    foreach(efb ${EXCLUDED_FROM_BUILD})
-        set(efb "${CMAKE_CURRENT_LIST_DIR}/${efb}")
-        list(REMOVE_ITEM SRCFILES ${efb})
-    endforeach()
-#"File by File" policy
-else()
-    #Add files manually here
-    #
-    # ...
-    #
-endif()
 
 #Documentation
 option(BUILD_DOCUMENTATION "Use Doxygen to create documentation" ON)
@@ -107,10 +181,37 @@ message(${MD_MESSAGES})
 message("--------------------------------------------------")
 add_compile_options(${MD_COMPILE_OPTIONS})
 
+message(STATUS "Build Type ???? " ${CMAKE_BUILD_TYPE})
+IF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING
+      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+      FORCE)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+#Source files    
+#Default policy is to build all source files
+set(DO_GLOBAL_RECURSE ON)
+if (DO_GLOBAL_RECURSE)
+    file(GLOB SRCFILES "${MD_PROJECT_SRC_ABSDIR}/*")
+
+    #Declare excluded files below
+    #set(EXCLUDED_FROM_BUILD )
+    foreach(efb ${EXCLUDED_FROM_BUILD})
+        set(efb "${CMAKE_CURRENT_LIST_DIR}/${efb}")
+        list(REMOVE_ITEM SRCFILES ${efb})
+    endforeach()
+#"File by File" policy
+else()
+    #Add files manually here
+    #
+    # ...
+    #
+endif()
+
+add_executable(ptl ${SRCFILES})
 
 #configure_file( version.hpp.in version.hpp)
 
-add_executable(ptl ${SRCFILES})
 #target_link_libraries(hellocmake ${Boost_LIBRARIES} armadillo pthread)
 
 enable_testing()
@@ -122,3 +223,9 @@ enable_testing()
 #add_test(NAME ListTests COMMAND test1 --list-tests)
 #add_test(NAME ListTags COMMAND test1 --list-tags)
 
+
+function (main)
+    message( STATUS "This is the main function")
+endfunction()
+
+main()
