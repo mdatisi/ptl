@@ -1,6 +1,12 @@
 *.o
 **/*.o
 
+CMakeCache.txt
+CMakeFiles/*
+CTestTestfile.cmake
+Makefile
+cmake_install.cmake
+
 
 
 **/CMakeCache.txt
@@ -10,3 +16,4 @@
 **/cmake_install.cmake
 
 build/*
+ptl
