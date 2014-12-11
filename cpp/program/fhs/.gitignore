@@ -1,6 +1,3 @@
-#Trick for empty directories
-build/.gitkeep
-
 # The files below are automatically generated
 src/version.hpp
 
