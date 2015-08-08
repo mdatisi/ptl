@@ -18,7 +18,11 @@ public:
         typedef std::map<std::string, std::function<void(visited_base*)>> 
             key_map_t;
 
-        visitor(const key_map_t& key_map ) : m_key_map(key_map) {}
+        visitor(const key_map_t& key_map );
+
+        //Returns empty string if [TODO]
+        std::string get_safe_key(visited_base* p) const;
+
 
         virtual void visit(visited_base* p);
 
@@ -33,7 +37,7 @@ protected:
     template <typename T>
     static void accept_visitor(T* t, visitor& v) { v.visit(t); }
 
-    key_set_t s_keys;
+    static key_set_t s_keys;
 
 private:
 
