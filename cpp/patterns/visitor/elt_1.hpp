@@ -9,11 +9,15 @@
 class elt_1 : public elt_base
 {
 public:
+    static const std::string key;
+
+
+
     std::string method_of_elt_1();
 
 
 private:    
-    VISITABLE("ELT_1")
+    VISITABLE(key);
 };
 
 #endif

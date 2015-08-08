@@ -14,14 +14,14 @@ using namespace std;
 
 action_1::action_1() : elt_base::visitor(
 {
-    {"ELT_1", [](elt_base* p) 
+    {elt_1::key, [](elt_base* p) 
         {
             cout << "In ACTION_1::ELT_1 handler" << endl;
             elt_1* e = dynamic_cast<elt_1*>(p);
             cout << e->method_of_elt_1() << endl;
         }
     },
-    {"ELT_2", [](elt_base* p)
+    {elt_2::key, [](elt_base* p)
         {
             cout << "In ACTION_1::ELT_2 handler" << endl;
             elt_2* e = dynamic_cast<elt_2*>(p);
