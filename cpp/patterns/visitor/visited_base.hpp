@@ -1,5 +1,5 @@
-#ifndef ELT_BASE_HPP
-#define ELT_BASE_HPP
+#ifndef VISITED_BASE_HPP
+#define VISITED_BASE_HPP
 
 #include <functional>
 #include <map>
@@ -7,7 +7,7 @@
 #include <unordered_set>
 
 //------------------------------------------------------------------------------
-class elt_base
+class visited_base
 {
 public:
     typedef std::unordered_set<std::string> key_set_t;
@@ -15,11 +15,12 @@ public:
     {
     public:
 
-        typedef std::map<std::string, std::function<void(elt_base*)>> key_map_t;
+        typedef std::map<std::string, std::function<void(visited_base*)>> 
+            key_map_t;
 
         visitor(const key_map_t& key_map ) : m_key_map(key_map) {}
 
-        virtual void visit(elt_base* p);
+        virtual void visit(visited_base* p);
 
         key_map_t m_key_map;
     };
@@ -43,7 +44,7 @@ private:
             { return KEY; } \
         void accept_(visitor& v) override \
         { \
-            elt_base::s_keys.insert(unique_key()); \
+            visited_base::s_keys.insert(unique_key()); \
             accept_visitor(this, v); \
         } 
 };
