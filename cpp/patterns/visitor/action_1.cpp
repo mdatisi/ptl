@@ -41,10 +41,6 @@ action_1::action_1() : visited_base::visitor(
 
 void action_1::visit(visited_base* p)
 {
-    cout << "key : " << p->unique_key() << endl;
-
-
-    //[TODO] Manage unknown or unsupported keys
     m_key_map[get_safe_key(p)](p);
 }
 

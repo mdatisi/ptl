@@ -5,7 +5,9 @@
 
 int main()
 {
-    elt_2 e;
+    elt_1 e1;
+    elt_2 e2;
     action_1 pp;
-    e.accept(pp);
+    e1.accept(pp);
+    e2.accept(pp);
 }
