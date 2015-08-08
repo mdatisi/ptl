@@ -19,7 +19,8 @@ public:
 
         visitor(const key_map_t& key_map );
 
-        //Returns empty string if [TODO]
+        //Returns empty string if the visitor doesn't support
+        //the visited node type
         std::string get_safe_key(visited_base* p) const;
 
         virtual void visit(visited_base* p);

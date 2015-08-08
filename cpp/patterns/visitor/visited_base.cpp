@@ -24,7 +24,9 @@ visited_base::visitor::visitor(const key_map_t& key_map ) :
     if (m_key_map.find("") == m_key_map.end())
     {
         m_key_map[""] = [](visited_base* p) {
-            cerr << "element " << p->unique_key() << " is not supported by this visitor" << endl;
+            cerr << "element " 
+                 << p->unique_key() 
+                 << " is not supported by this visitor" << endl;
         };
     }
 }
