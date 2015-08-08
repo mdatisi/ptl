@@ -14,7 +14,6 @@ public:
     class visitor
     {
     public:
-
         typedef std::map<std::string, std::function<void(visited_base*)>> 
             key_map_t;
 
@@ -22,7 +21,6 @@ public:
 
         //Returns empty string if [TODO]
         std::string get_safe_key(visited_base* p) const;
-
 
         virtual void visit(visited_base* p);
 
@@ -40,7 +38,6 @@ protected:
     static key_set_t s_keys;
 
 private:
-
     //Derived-classes must be declared `VISITABLE'
     virtual void accept_(visitor& v );
     #define VISITABLE(KEY) \
