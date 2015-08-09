@@ -20,20 +20,20 @@ action_1::action_1() : visited_base::visitor(
             elt_1* e = dynamic_cast<elt_1*>(p);
             cout << e->method_of_elt_1() << endl;
         }
-    }
-/*    {elt_2::key, [](visited_base* p)
+    },
+    {elt_2::key, [](visited_base* p)
         {
             cout << "In ACTION_1::ELT_2 handler" << endl;
             elt_2* e = dynamic_cast<elt_2*>(p);
             cout << e->method_of_elt_2() << endl;            
         }
-    },*/
-/*    {"", [](visited_base* p)
+    },
+    {"", [](visited_base* p)
         {
             cout << "In ACTION_1::ERROR handler" << endl;
             cout << "ERROR" << endl;
         }
-    }*/
+    }
 })
 {}
 
