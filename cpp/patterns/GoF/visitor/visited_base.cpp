@@ -62,11 +62,17 @@ visited_base::visitor::visitor(const key_map_t& key_map ) :
 //------------------------------------------------------------------------------
 void visited_base::visitor::operator()(visited_base* vted)
 {
-    m_key_map[get_safe_key(vted)](vted);
+    m_key_map[safe_key(vted)](vted);
 }
 
 //------------------------------------------------------------------------------
-std::string visited_base::visitor::get_safe_key(visited_base* vted) const
+bool visited_base::visitor::supported(visited_base* vted)
+{
+    return !safe_key(vted).empty();
+}
+
+//------------------------------------------------------------------------------
+std::string visited_base::visitor::safe_key(visited_base* vted) const
 {
     //Check if the visited_base key is in the key map of the visitor
     //returns empty string if not

@@ -42,10 +42,13 @@ public:
         //operator() : the visitor `visit' function
         void operator()(visited_base* vted);
 
+        //Returns `true' if the visited object type is handled by the visitor
+        bool supported(visited_base* vted);
+
     private:
         //Returns empty string if the visitor doesn't support
         //the visited node type
-        std::string get_safe_key(visited_base* vted) const;
+        std::string safe_key(visited_base* vted) const;
 
     private:
         key_map_t m_key_map;
