@@ -53,9 +53,6 @@ public:
     std::string unique_key() const;
 
 protected:
-    template <typename T>
-    static void accept_visitor(T* t, visitor& vtor) { vtor.visit(t); }
-
     using key_set_t =  std::unordered_set<std::string>;
     static key_set_t s_keys;
 
@@ -70,7 +67,7 @@ private:
         void accept_(visitor& vtor) override \
         { \
             visited_base::s_keys.insert(unique_key_()); \
-            accept_visitor(this, vtor); \
+            vtor.visit(this);\
         } 
 };
 
