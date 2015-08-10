@@ -17,16 +17,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
-#ifndef ACTION_1_HPP
-#define ACTION_1_HPP
+#ifndef VISITOR_1_HPP
+#define VISITOR_1_HPP
 
 #include "visited_base.hpp"
 
 //------------------------------------------------------------------------------
-class action_1: public visited_base::visitor
+class visitor_1: public visited_base::visitor
 {
 public:
-        action_1();
+        visitor_1();
 };
 
-#endif //#ifndef ACTION_1_HPP
+#endif //#ifndef VISITOR_1_HPP

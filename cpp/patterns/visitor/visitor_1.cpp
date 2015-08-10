@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
-#include "action_1.hpp"
+#include "visitor_1.hpp"
 #include "elt_1.hpp"
 #include "elt_2.hpp"
 
@@ -26,7 +26,7 @@
 
 using namespace std;
 
-action_1::action_1() : visited_base::visitor(
+visitor_1::visitor_1() : visited_base::visitor(
 {
     {elt_1::key, [](visited_base* p) 
         {
