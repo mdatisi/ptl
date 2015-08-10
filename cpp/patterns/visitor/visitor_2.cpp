@@ -28,19 +28,24 @@ using namespace std;
 
 visitor_2::visitor_2() : visited_base::visitor(
 {
+//------------------------------------------------------------------------------
     {elt_1::key, [](visited_base* vted) 
         {
             elt_1* e = dynamic_cast<elt_1*>(vted);
             cout << "visitor_2 : elt_1 : " << e->method_of_elt_1() << endl;
         }
     },
+
+//------------------------------------------------------------------------------
     {elt_2::key, [](visited_base* vted)
         {
             elt_2* e = dynamic_cast<elt_2*>(vted);
             cout << "visitor_2 : elt_2 : " << e->method_of_elt_2() << endl;
         }
     }
-    //Note : This visitor does NOT handle the 'empty' key case
+
+//------------------------------------------------------------------------------
+//Note : This visitor does NOT handle the 'empty' key case
 })
 {
 }
