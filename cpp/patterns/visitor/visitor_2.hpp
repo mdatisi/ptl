@@ -17,23 +17,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
+#ifndef VISITOR_2_HPP
+#define VISITOR_2_HPP
 
-#include "elt_1.hpp"
-#include "elt_2.hpp"
-#include "visitor_1.hpp"
-#include "visitor_2.hpp"
+#include "visited_base.hpp"
 
-int main()
+//------------------------------------------------------------------------------
+class visitor_2: public visited_base::visitor
 {
-    elt_1 e1;
-    elt_2 e2;
+public:
+        visitor_2();
+};
 
-    visitor_1 v1 ;
-    e1.accept(v1);
-    e2.accept(v1);
-
-
-    visitor_2 v2 ;
-    e1.accept(v2);
-    e2.accept(v2);
-}
+#endif //#ifndef VISITOR_1_HPP
