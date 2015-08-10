@@ -27,13 +27,13 @@ class base_class
 public:
         void statically_virtual_function()
         {
-            impl()->statically_virtual_function_implementation();
+            impl().statically_virtual_function_implementation();
         }
 
 private:
-    DERIVED* impl()
+    DERIVED& impl()
     {
-        return static_cast<DERIVED*>(this);
+        return static_cast<DERIVED&>(*this);
     }
 };
 
