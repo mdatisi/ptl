@@ -60,6 +60,12 @@ void visited_base::visitor::visit(visited_base* vted)
     m_key_map[get_safe_key(vted)](vted);
 }
 
+void visited_base::visitor::operator()(visited_base* vted)
+{
+    visit(vted);
+}
+
+
 std::string visited_base::visitor::get_safe_key(visited_base* vted) const
 {
     //Check if the visited_base key is in the key map of the visitor

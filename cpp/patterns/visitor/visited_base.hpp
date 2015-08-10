@@ -37,7 +37,9 @@ public:
 
         visitor(const key_map_t& key_map);
 
+        
         void visit(visited_base* vted);
+        void operator()(visited_base* vted); //equivalent to `visit'
 
     private:
         //Returns empty string if the visitor doesn't support
@@ -67,7 +69,7 @@ private:
         void accept_(visitor& vtor) override \
         { \
             visited_base::s_keys.insert(unique_key_()); \
-            vtor.visit(this);\
+            vtor(this);\
         } 
 };
 
