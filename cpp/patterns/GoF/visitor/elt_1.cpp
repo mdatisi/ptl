@@ -18,8 +18,10 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+//MODULE
 #include "elt_1.hpp"
 
+//C++ STANDARD
 #include <string>
 
 const std::string elt_1::key {"ELT_1"};

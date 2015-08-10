@@ -18,8 +18,10 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+//MODULE
 #include "visited_base.hpp"
 
+//C++ STANDARD
 #include <iostream>
 
 visited_base::key_set_t visited_base::s_keys;
@@ -30,10 +32,12 @@ void visited_base::accept(visitor& vtor)
     accept_(vtor);
 }
 
+//------------------------------------------------------------------------------
 void visited_base::accept_(visitor& vtor)
 {
 }
 
+//------------------------------------------------------------------------------
 std::string visited_base::unique_key() const
 {
     return unique_key_();
@@ -55,17 +59,13 @@ visited_base::visitor::visitor(const key_map_t& key_map ) :
     }
 }
 
-void visited_base::visitor::visit(visited_base* vted)
+//------------------------------------------------------------------------------
+void visited_base::visitor::operator()(visited_base* vted)
 {
     m_key_map[get_safe_key(vted)](vted);
 }
 
-void visited_base::visitor::operator()(visited_base* vted)
-{
-    visit(vted);
-}
-
-
+//------------------------------------------------------------------------------
 std::string visited_base::visitor::get_safe_key(visited_base* vted) const
 {
     //Check if the visited_base key is in the key map of the visitor
@@ -76,8 +76,4 @@ std::string visited_base::visitor::get_safe_key(visited_base* vted) const
         return key;
     return "";
 }
-
-
-
-
 

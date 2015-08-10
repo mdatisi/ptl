@@ -20,8 +20,10 @@
 #ifndef ELT_1_HPP
 #define ELT_1_HPP
 
+//MODULE
 #include "visited_base.hpp"
 
+//C++ STANDARD
 #include <string>
 
 //------------------------------------------------------------------------------
@@ -35,5 +37,5 @@ public:
 private:    
     VISITABLE(key);
 };
-
+//----------
 #endif //#ifndef ELT_1_HPP

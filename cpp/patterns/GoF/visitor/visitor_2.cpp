@@ -18,17 +18,20 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+//MODULE
 #include "visitor_2.hpp"
 #include "elt_1.hpp"
 #include "elt_2.hpp"
 
-#include <iostream>
+//C++ STANDARD
+#include<iostream>
 
 using namespace std;
 
+//------------------------------------------------------------------------------
 visitor_2::visitor_2() : visited_base::visitor(
 {
-//------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     {elt_1::key, [](visited_base* vted) 
         {
             elt_1* e = dynamic_cast<elt_1*>(vted);
@@ -36,7 +39,7 @@ visitor_2::visitor_2() : visited_base::visitor(
         }
     },
 
-//------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     {elt_2::key, [](visited_base* vted)
         {
             elt_2* e = dynamic_cast<elt_2*>(vted);
@@ -44,8 +47,8 @@ visitor_2::visitor_2() : visited_base::visitor(
         }
     }
 
-//------------------------------------------------------------------------------
-//Note : This visitor does NOT handle the 'empty' key case
+    //--------------------------------------------------------------------------
+    //Note : This visitor does NOT handle the 'empty' key case
 })
 {
 }

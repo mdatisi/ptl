@@ -18,13 +18,14 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+//MODULE
 #include "elt_1.hpp"
 #include "elt_2.hpp"
 #include "elt_3.hpp"
-
 #include "visitor_1.hpp"
 #include "visitor_2.hpp"
 
+//------------------------------------------------------------------------------
 int main()
 {
     elt_1 e1;

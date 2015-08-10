@@ -20,6 +20,7 @@
 #ifndef VISITOR_1_HPP
 #define VISITOR_1_HPP
 
+//MODULE
 #include "visited_base.hpp"
 
 //------------------------------------------------------------------------------
@@ -28,5 +29,5 @@ class visitor_1: public visited_base::visitor
 public:
         visitor_1();
 };
-
+//----------
 #endif //#ifndef VISITOR_1_HPP

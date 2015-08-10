@@ -18,17 +18,20 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
+//MODULE
 #include "visitor_1.hpp"
 #include "elt_1.hpp"
 #include "elt_2.hpp"
 
+//C++ STANDARD
 #include <iostream>
 
 using namespace std;
 
+//------------------------------------------------------------------------------
 visitor_1::visitor_1() : visited_base::visitor(
 {
-//------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     {elt_1::key, [](visited_base* vted) 
         {
             elt_1* e = dynamic_cast<elt_1*>(vted);
@@ -36,7 +39,7 @@ visitor_1::visitor_1() : visited_base::visitor(
         }
     },
 
-//------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     {elt_2::key, [](visited_base* vted)
         {
             elt_2* e = dynamic_cast<elt_2*>(vted);
@@ -44,7 +47,7 @@ visitor_1::visitor_1() : visited_base::visitor(
         }
     },
     
-//------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     {"", [](visited_base* vted)
         {
             cerr << "visitor_1 : " << vted->unique_key() << " is non handled" << endl;

@@ -20,6 +20,7 @@
 #ifndef VISITED_BASE_HPP
 #define VISITED_BASE_HPP
 
+//C++ STANDARD
 #include <functional>
 #include <map>
 #include <string>
@@ -29,6 +30,7 @@
 class visited_base
 {
 public:
+    //--------------------------------------------------------------------------
     class visitor
     {
     public:
@@ -36,10 +38,9 @@ public:
             std::map<std::string, std::function<void(visited_base*)>>; 
 
         visitor(const key_map_t& key_map);
-
         
-        void visit(visited_base* vted);
-        void operator()(visited_base* vted); //equivalent to `visit'
+        //operator() : the visitor `visit' function
+        void operator()(visited_base* vted);
 
     private:
         //Returns empty string if the visitor doesn't support
@@ -49,7 +50,8 @@ public:
     private:
         key_map_t m_key_map;
     };
-
+    //----------
+    
     void accept(visitor& vtor);
 
     std::string unique_key() const;
@@ -72,5 +74,5 @@ private:
             vtor(this);\
         } 
 };
-
+//----------
 #endif //#ifndef VISITED_BASE_HPP
