@@ -20,6 +20,8 @@
 
 #include "elt_1.hpp"
 #include "elt_2.hpp"
+#include "elt_3.hpp"
+
 #include "visitor_1.hpp"
 #include "visitor_2.hpp"
 
@@ -27,13 +29,16 @@ int main()
 {
     elt_1 e1;
     elt_2 e2;
+    elt_3 e3;
 
     visitor_1 v1 ;
     e1.accept(v1);
     e2.accept(v1);
+    e3.accept(v1);
 
 
     visitor_2 v2 ;
     e1.accept(v2);
     e2.accept(v2);
+    e3.accept(v2);
 }

@@ -17,34 +17,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
+#ifndef ELT_3_HPP
+#define ELT_3_HPP
 
-#include "visitor_1.hpp"
-#include "elt_1.hpp"
-#include "elt_2.hpp"
+#include "visited_base.hpp"
 
-#include <iostream>
+#include <string>
 
-using namespace std;
-
-visitor_1::visitor_1() : visited_base::visitor(
+//------------------------------------------------------------------------------
+class elt_3 : public visited_base
 {
-    {elt_1::key, [](visited_base* vted) 
-        {
-            elt_1* e = dynamic_cast<elt_1*>(vted);
-            cout << "visitor_1 : elt_1 : " << e->method_of_elt_1() << endl;
-        }
-    },
-    {elt_2::key, [](visited_base* vted)
-        {
-            elt_2* e = dynamic_cast<elt_2*>(vted);
-            cout << "visitor_1 : elt_2 : " << e->method_of_elt_2() << endl;
-        }
-    },
-    {"", [](visited_base* vted)
-        {
-            cerr << "visitor_1 : " << vted->unique_key() << " is non handled" << endl;
-        }
-    }
-})
-{
-}
+public:
+    static const std::string key;
+
+    std::string method_of_elt_3();
+
+private:    
+    VISITABLE(key);
+};
+
+#endif //#ifndef ELT_3_HPP

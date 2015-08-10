@@ -38,37 +38,39 @@ public:
 
         visitor(const key_map_t& key_map);
 
-        void visit(visited_base* p);
+        void visit(visited_base* vted);
 
     private:
         //Returns empty string if the visitor doesn't support
         //the visited node type
-        std::string get_safe_key(visited_base* p) const;
+        std::string get_safe_key(visited_base* vted) const;
 
     private:
         key_map_t m_key_map;
     };
 
-    void accept(visitor& v);
+    void accept(visitor& vtor);
 
-    virtual std::string unique_key() const = 0;
+    std::string unique_key() const;
 
 protected:
     template <typename T>
-    static void accept_visitor(T* t, visitor& v) { v.visit(t); }
+    static void accept_visitor(T* t, visitor& vtor) { vtor.visit(t); }
 
     static key_set_t s_keys;
 
 private:
+    virtual std::string unique_key_() const = 0;
+
     //Derived-classes must be declared `VISITABLE'
-    virtual void accept_(visitor& v );
-    #define VISITABLE(KEY) \
-        std::string unique_key() const override \
-            { return KEY; } \
-        void accept_(visitor& v) override \
+    virtual void accept_(visitor& vtor );
+    #define VISITABLE(UNIQUE_KEY) \
+        std::string unique_key_() const override \
+            { return UNIQUE_KEY; } \
+        void accept_(visitor& vtor) override \
         { \
-            visited_base::s_keys.insert(unique_key()); \
-            accept_visitor(this, v); \
+            visited_base::s_keys.insert(unique_key_()); \
+            accept_visitor(this, vtor); \
         } 
 };
 

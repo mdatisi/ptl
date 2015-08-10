@@ -18,33 +18,14 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //------------------------------------------------------------------------------
 
-#include "visitor_1.hpp"
-#include "elt_1.hpp"
-#include "elt_2.hpp"
+#include "elt_3.hpp"
 
-#include <iostream>
+#include <string>
 
-using namespace std;
+const std::string elt_3::key {"ELT_3"};
 
-visitor_1::visitor_1() : visited_base::visitor(
+//------------------------------------------------------------------------------
+std::string elt_3::method_of_elt_3()
 {
-    {elt_1::key, [](visited_base* vted) 
-        {
-            elt_1* e = dynamic_cast<elt_1*>(vted);
-            cout << "visitor_1 : elt_1 : " << e->method_of_elt_1() << endl;
-        }
-    },
-    {elt_2::key, [](visited_base* vted)
-        {
-            elt_2* e = dynamic_cast<elt_2*>(vted);
-            cout << "visitor_1 : elt_2 : " << e->method_of_elt_2() << endl;
-        }
-    },
-    {"", [](visited_base* vted)
-        {
-            cerr << "visitor_1 : " << vted->unique_key() << " is non handled" << endl;
-        }
-    }
-})
-{
+    return "method_of_elt_3";
 }

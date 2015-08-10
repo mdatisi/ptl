@@ -22,19 +22,22 @@
 
 #include <iostream>
 
-using namespace std;
-
 visited_base::key_set_t visited_base::s_keys;
 
 //------------------------------------------------------------------------------
-void visited_base::accept(visitor& v)
+void visited_base::accept(visitor& vtor)
 {
-    accept_(v);
-};
+    accept_(vtor);
+}
 
-void visited_base::accept_(visitor& v)
+void visited_base::accept_(visitor& vtor)
 {
-};
+}
+
+std::string visited_base::unique_key() const
+{
+    return unique_key_();
+}
 
 //------------------------------------------------------------------------------
 visited_base::visitor::visitor(const key_map_t& key_map ) :
@@ -43,24 +46,25 @@ visited_base::visitor::visitor(const key_map_t& key_map ) :
     //Adds "empty key" if the derived class didn't add it itself
     if (m_key_map.find("") == m_key_map.end())
     {
-        m_key_map[""] = [](visited_base* p) {
-            cerr << "element " 
-                 << p->unique_key() 
-                 << " is not supported by this visitor" << endl;
+        m_key_map[""] = [](visited_base* vted) {
+            std::cerr << "element " 
+                      << vted->unique_key() 
+                      << " is not supported by this visitor" 
+                      << std::endl;
         };
     }
 }
 
-void visited_base::visitor::visit(visited_base* p)
+void visited_base::visitor::visit(visited_base* vted)
 {
-    m_key_map[get_safe_key(p)](p);
+    m_key_map[get_safe_key(vted)](vted);
 }
 
-string visited_base::visitor::get_safe_key(visited_base* p) const
+std::string visited_base::visitor::get_safe_key(visited_base* vted) const
 {
     //Check if the visited_base key is in the key map of the visitor
     //returns empty string if not
-    string key = p->unique_key();
+    auto key = vted->unique_key();
     auto it = m_key_map.find(key); 
     if (it != m_key_map.end())
         return key;
