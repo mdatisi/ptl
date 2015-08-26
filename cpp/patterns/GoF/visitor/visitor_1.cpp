@@ -24,6 +24,7 @@
 #include "elt_2.hpp"
 
 //C++ STANDARD
+#include <cassert>
 #include <iostream>
 
 using namespace std;
@@ -35,6 +36,8 @@ visitor_1::visitor_1() : visited_base::visitor(
     {elt_1::key, [](visited_base* vted) 
         {
             elt_1* e = dynamic_cast<elt_1*>(vted);
+            assert(nullptr != e);
+
             cout << "visitor_1 : elt_1 : " << e->method_of_elt_1() << endl;
         }
     },
@@ -43,6 +46,8 @@ visitor_1::visitor_1() : visited_base::visitor(
     {elt_2::key, [](visited_base* vted)
         {
             elt_2* e = dynamic_cast<elt_2*>(vted);
+            assert(nullptr != e);
+
             cout << "visitor_1 : elt_2 : " << e->method_of_elt_2() << endl;
         }
     },
