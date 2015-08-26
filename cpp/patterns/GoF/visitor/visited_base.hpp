@@ -37,7 +37,7 @@ public:
         using key_map_t = 
             std::map<std::string, std::function<void(visited_base*)>>; 
 
-        visitor(const key_map_t& key_map);
+        explicit visitor(const key_map_t& key_map);
         
         //operator() : the visitor `visit' function
         void operator()(visited_base* vted);
